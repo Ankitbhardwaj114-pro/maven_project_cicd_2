@@ -33,14 +33,28 @@ jobs:
       - name: Display Maven Version
         run: mvn -v
 
-      - name: Build with Maven
-        run: |
-          mvn clean validate compile test package verify install
-          # Clean ensures a fresh build by removing old artifacts
+      - name: Maven Validate
+        run: mvn validate
 
+      - name: Maven Compile
+        run: mvn compile
+
+      - name: Maven Test
+        run: mvn test
+
+      - name: Maven Package
+        run: mvn package
+
+      - name: Maven Verify
+        run: mvn verify
+
+      - name: Maven Install
+        run: mvn install
+
+      # Temporarily skipping 'site' due to plugin conflict
       - name: Display Build Directory Content
         run: |
-          echo "--- Target Directory Contents ---"
+          echo "\n--- Target Directory Contents ---"
           ls -lah target
 
       - name: Archive Build Artifacts
